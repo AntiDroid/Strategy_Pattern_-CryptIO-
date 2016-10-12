@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class CryptoStrategyZuordnung implements CryptoStrategy {
@@ -20,16 +19,11 @@ public class CryptoStrategyZuordnung implements CryptoStrategy {
 			Scanner scan;
 			scan = new Scanner(new File(fAssignment));
 
-			while(true){
-				
-				try{
-					normal.add(scan.useDelimiter("\\s+").next());
-					code.add(scan.useDelimiter("\\s+").next());
-				}catch(NoSuchElementException e){
-					scan.close();
-					break;
-				}
+			while(scan.hasNext()){
+				normal.add(scan.useDelimiter("\\s+").next());
+				code.add(scan.useDelimiter("\\s+").next());
 			}
+			scan.close();
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
