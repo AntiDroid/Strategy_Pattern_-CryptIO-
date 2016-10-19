@@ -18,10 +18,11 @@ public class CryptoStrategyZuordnung implements CryptoStrategy {
 		try {
 			Scanner scan;
 			scan = new Scanner(new File(fAssignment));
+			scan.useDelimiter("\\s+");
 
 			while(scan.hasNext()){
-				normal.add(scan.useDelimiter("\\s+").next());
-				code.add(scan.useDelimiter("\\s+").next());
+				normal.add(scan.next());
+				code.add(scan.next());
 			}
 			scan.close();
 			

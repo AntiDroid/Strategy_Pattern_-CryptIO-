@@ -17,10 +17,15 @@ public class Run {
 		
 			System.out.println("["+(i+1)+"/"+wordCount+"]Text: ");
 			CryptoIO crypt = new CryptoIO(scan.next());
-
-			System.out.println("\n\n\tCAESAR");
-			crypt.setCryptoStrategy(new CryptoStrategyCaesar());
-			doStuff(crypt, fPath);
+			
+			if(hasOnlyLetters(crypt.getText())){
+				
+				System.out.println("\n\n\tCAESAR");
+				crypt.setCryptoStrategy(new CryptoStrategyCaesar(1));
+				doStuff(crypt, fPath);
+			}
+			else
+				System.out.println("\n\nOnly use letters to encrypt with Caesar\n\n");
 
 			System.out.println("\tJAVA");
 			crypt.setCryptoStrategy(new CryptoStrategyJava());
@@ -45,7 +50,6 @@ public class Run {
 	static void doStuff(CryptoIO crypt, String fPath){
 
 		try{
-			
 			crypt.write(fPath);
 			System.out.println("Verschluesselt: \""+crypt.getCoded()+"\"");
 			crypt.read(fPath);
@@ -55,6 +59,16 @@ public class Run {
 			e.printStackTrace();
 		}
 
+	}
+	
+	static boolean hasOnlyLetters(String text){
+		
+		for(int j = 0; j < text.length(); j++){
+			if(!Character.isLetter(text.charAt(j))){
+				return false;
+			}
+		}
+		return true;
 	}
 
 }
